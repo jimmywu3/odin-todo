@@ -1,8 +1,118 @@
+:root{
+    --sidebar_color: antiquewhite;
+    --nonfocus_text_color: grey;
+    --background-color: aliceblue;
+}
+
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body{
-    background-color: aliceblue;
+    background-color: var(--background-color);
+    display: flex;
+}
+
+.sidebar{
+    position: fixed;
+    background-color: var(--sidebar_color);
+    width: 200px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 5px 10px;
+    z-index: 1;
+    box-shadow: 1px 0px 5px 0px grey;
+}
+
+.sidebar .logo{
+    height: 5%;
+    text-align: center;
+}
+
+.sidebar .logo button{
+    background-color: var(--sidebar_color);
+    border: none;
+    height: 100%;
+}
+
+.sidebar .projects{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sidebar ul{
+    border-top: solid 1px var(--nonfocus_text_color);
+    border-bottom: solid 1px var(--nonfocus_text_color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.sidebar li{
+    list-style: none;
+}
+
+.sidebar .new-project, .sidebar li button{
+    background-color: var(--sidebar_color);
+    border: none;
+    color: var(--nonfocus_text_color);
+}
+
+.sidebar .logo button:hover, .content .project .title{
+    cursor: pointer;
+}
+
+.sidebar .new-project:hover, .sidebar li button:hover{
+    cursor: pointer;
+    color: black;
+}
+
+.content{
+    margin-left: 200px;
+    height: 100vh;
+    width: 100%;
+    padding: 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.project .title{
+    margin-left: 4px;
+    border: none;
+    background-color: var(--background-color);
+}
+
+.project .tasks{
+    padding: 8px 4px;
+    height: 175px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(200px, 1fr));
+    gap: 16px;
+    overflow: hidden;
+}
+
+.project .tasks .task{
+    border-top: solid 8px var(--sidebar_color);
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 5px 0px grey;
+}
+
+.tasks .task{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.tasks .task .actions{
+    align-self: flex-end;
+    margin-top: auto;
 }
