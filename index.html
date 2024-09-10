@@ -7,6 +7,45 @@
     <title>Template</title>
 <script defer src="main.js"></script></head>
 <body>
-    
+    <div class="sidebar">
+        <div class="logo">
+            <!-- When this is clicked it should take user back to initial page -->
+            <button>
+                <h1>Todo List</h1>
+            </button>
+        </div>
+
+        <div class="projects">
+            <ul>
+                <!-- Will be adding to this when new-project button is clicked -->
+                <li><button>test 1</button></li>
+                <li><button>test 2</button></li>
+                <li><button>test 3</button></li>
+            </ul>
+            <button class="new-project">New Project +</button>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="project p1">
+            <button class="title"><h1>test 1</h1></button>
+            <div class="tasks">
+                <div class="task">
+                    <h2>Name</h2>
+                    <p>Due date</p>
+                    <div class="actions">
+                        <!-- Should be changed for icons -->
+                        <button id="edit">edit</button>
+                        <button id="finish">completed</button>
+                    </div>
+                </div>
+                <div class="task"></div>
+                <div class="task"></div>
+                <div class="task"></div>
+                <div class="task"></div>
+            </div>
+        </div>
+        
+    </div>
 </body>
 </html>
