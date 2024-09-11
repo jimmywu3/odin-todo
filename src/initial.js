@@ -1,6 +1,7 @@
 import editIcon from "./assets/edit.svg"
 import finishIcon from "./assets/finish.svg"
 import { Project } from "./project-task";
+import { Projects } from "./data";
 
 const test = (function(){
     return "test";
@@ -111,8 +112,7 @@ const createNewProjectInitializer = function(){
             event.preventDefault();
             console.log(projectName.value);
             const project = Project(projectName.value);
-            console.log(project);
-            /* add element to projects array*/
+            Projects.push(project);
             dialog.close();
             form.reset();
         } else{
@@ -122,7 +122,9 @@ const createNewProjectInitializer = function(){
 
 }
 
-const initialDom = (function(array, length){
+// will be moved into a dom helper js
+
+const createDom = (function(array, length){
     const sidebar = document.querySelector(".sidebar .projects ul");
     const content = document.querySelector(".content");
     for(let i = 0; i < length; i++){
@@ -132,4 +134,4 @@ const initialDom = (function(array, length){
     createNewProjectInitializer();
 });
 
-export {test, initialDom}; 
+export {test, createDom}; 
