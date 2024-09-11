@@ -84,9 +84,13 @@ const contentTaskHelper = function(tasks){
     }
 
     //Create an addmore / view all button
-    
+
 
     return tasksContainer;
+}
+
+const newBtnCode = function(){
+    
 }
 
 const initialDom = (function(array, length){
