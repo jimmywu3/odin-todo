@@ -1,5 +1,6 @@
 import editIcon from "./assets/edit.svg"
 import finishIcon from "./assets/finish.svg"
+import { Project } from "./project-task";
 
 const test = (function(){
     return "test";
@@ -89,8 +90,36 @@ const contentTaskHelper = function(tasks){
     return tasksContainer;
 }
 
-const newBtnCode = function(){
+const createNewProjectInitializer = function(){
+    const dialog = document.querySelector(".newProject");
+    const newBtn = document.querySelector(".new-project");
+    const closeModal = document.querySelector(".newProject .close");
+    newBtn.addEventListener("click", () => {
+        dialog.showModal();
+    });
+
+    closeModal.addEventListener("click", () => {
+        dialog.close();
+    });
+
+    const form = document.querySelector(".newProject form");
+    const submitBtn = document.querySelector(".newProject form button");
+    const projectName = document.querySelector(".newProject form #projectName");
     
+    submitBtn.addEventListener("click", (event) =>{
+        if(projectName.checkValidity()){
+            event.preventDefault();
+            console.log(projectName.value);
+            const project = Project(projectName.value);
+            console.log(project);
+            /* add element to projects array*/
+            dialog.close();
+            form.reset();
+        } else{
+            projectName.reportValidity();
+        }
+    });
+
 }
 
 const initialDom = (function(array, length){
@@ -100,6 +129,7 @@ const initialDom = (function(array, length){
         sidebar.appendChild(sidebarHelper(array[i].name));
         content.appendChild(contentProjectHelper(array[i].name, array[i].getTasks(), i));
     }
+    createNewProjectInitializer();
 });
 
 export {test, initialDom}; 
