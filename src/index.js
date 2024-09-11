@@ -11,6 +11,7 @@ const task2 = Task("task2", "task2 description");
 project1.addTask(task2);
 const task3 = Task("task3", "task3 description");
 project1.addTask(task3);
+
 Projects.push(project1);
 
 initialDom(Projects, Projects.length);

@@ -1,3 +1,6 @@
+import editIcon from "./assets/edit.svg"
+import finishIcon from "./assets/finish.svg"
+
 const test = (function(){
     return "test";
 });
@@ -43,7 +46,7 @@ const contentTaskHelper = function(tasks){
     const tasksContainer = document.createElement("div");
     tasksContainer.className = "tasks"
 
-    for(let i = 0; i < tasks.length; i++){
+    for(let i = 0; i < Math.min(tasks.length, 4); i++){
         const taskContainer = document.createElement("div");
         taskContainer.className = `task ${i}`;
 
@@ -59,13 +62,19 @@ const contentTaskHelper = function(tasks){
         actions.className = "actions";
 
         const editBtn = document.createElement("button");
+        // create an image to store inside button
         editBtn.id = "edit";
-        editBtn.textContent = "edit"
+        const editImg = document.createElement("img");
+        editImg.src = editIcon;
+        editBtn.appendChild(editImg);
         actions.appendChild(editBtn);
 
         const finishBtn = document.createElement("button");
+        // create an image to store inside button
         finishBtn.id = "finish"
-        finishBtn.textContent = "completed"
+        const finishImg = document.createElement("img");
+        finishImg.src = finishIcon;
+        finishBtn.appendChild(finishImg);
         actions.appendChild(finishBtn);
 
         taskContainer.appendChild(actions);
@@ -73,6 +82,9 @@ const contentTaskHelper = function(tasks){
 
         tasksContainer.appendChild(taskContainer);
     }
+
+    //Create an addmore / view all button
+    
 
     return tasksContainer;
 }
