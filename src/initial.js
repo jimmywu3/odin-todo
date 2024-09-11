@@ -2,6 +2,7 @@ import editIcon from "./assets/edit.svg"
 import finishIcon from "./assets/finish.svg"
 import { Project } from "./project-task";
 import { Projects } from "./data";
+import { resetPage } from "./domHelper";
 
 const test = (function(){
     return "test";
@@ -113,13 +114,20 @@ const createNewProjectInitializer = function(){
             console.log(projectName.value);
             const project = Project(projectName.value);
             Projects.push(project);
+            updatePage();
             dialog.close();
             form.reset();
+            console.log(Projects)
         } else{
             projectName.reportValidity();
         }
     });
 
+}
+
+const updatePage = () => {
+    resetPage();
+    createDom(Projects, Projects.length);
 }
 
 // will be moved into a dom helper js

@@ -1,5 +1,5 @@
 const resetPage = () => {
-    const sidebarProjects = document.querySelector(".project ul");
+    const sidebarProjects = document.querySelector(".projects ul");
     let child = sidebarProjects.lastElementChild;
     while(child){
         sidebarProjects.removeChild(child);
@@ -10,6 +10,8 @@ const resetPage = () => {
     child = content.lastElementChild;
     while(child){
         content.removeChild(child);
-        child = contnet.lastElementChild;
+        child = content.lastElementChild;
     } 
 }
+
+export {resetPage};
