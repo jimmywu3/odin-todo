@@ -87,7 +87,27 @@ body{
     margin-left: 4px;
     border: none;
     background-color: var(--background-color);
+    display: flex;
 }
+
+.project .view-all-button{
+    border: none;
+    background-color: var(--background-color);
+    margin-left: 8px;
+    display: flex;
+    gap: 4px;
+    align-self: center;
+}
+
+.project .view-all-button:hover{
+    cursor: pointer;
+}
+
+.project .view-all-button img{
+    width: 16px;
+    height: 16px;
+}
+
 
 .project .tasks{
     padding: 8px 4px;
@@ -145,7 +165,6 @@ dialog .close{
     position: absolute;
     left: 144px;
     top: 4px;
-    
 }
 
 dialog form{

@@ -1,5 +1,6 @@
 import editIcon from "./assets/edit.svg"
 import finishIcon from "./assets/finish.svg"
+import viewIcon from "./assets/view.svg"
 import { Project } from "./project-task";
 import { Projects } from "./data";
 import { resetPage } from "./domHelper";
@@ -36,12 +37,25 @@ const contentProjectHelper = function(name, tasks, index){
 
 //creates clickable title for project
 const contentTitleHelper = function(name){
-    const titleBtn = document.createElement("button");
-    titleBtn.className = "title"
     const title = document.createElement("h1");
+    title.className = "title";
     title.textContent = name;
-    titleBtn.appendChild(title);
-    return titleBtn;
+
+    //view all button
+    const viewAllBtn = document.createElement("button");
+    viewAllBtn.className = "view-all-button";
+
+    const viewAllIcon = document.createElement("img");
+    viewAllIcon.src = viewIcon;
+    viewAllBtn.appendChild(viewAllIcon);
+
+
+    const viewAllText = document.createElement("p");
+    viewAllText.textContent = "View All";
+    viewAllBtn.appendChild(viewAllText);
+
+    title.appendChild(viewAllBtn);
+    return title;
 }
 
 // this could be repurposed for creating tasks n stuff in the individual project focused pages
