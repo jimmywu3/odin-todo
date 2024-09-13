@@ -2,12 +2,15 @@ import editIcon from "./assets/edit.svg"
 import finishIcon from "./assets/finish.svg"
 import viewIcon from "./assets/view.svg"
 
-const resetPage = () => {
-    const sidebarProjects = document.querySelector(".projects ul");
-    let child = sidebarProjects.lastElementChild;
-    while(child){
-        sidebarProjects.removeChild(child);
+const resetPage = function(contentFocused){
+    let child;
+    if(!(contentFocused)){
+        const sidebarProjects = document.querySelector(".projects ul");
         child = sidebarProjects.lastElementChild;
+        while(child){
+            sidebarProjects.removeChild(child);
+            child = sidebarProjects.lastElementChild;
+        }
     }
 
     const content = document.querySelector(".content");
@@ -22,11 +25,12 @@ const resetPage = () => {
 const contentProjectHelper = function(projectRef, index, contentFocused){
     // creates div with class of project and p#
     const projectContainer = document.createElement("div");
-    projectContainer.classList.add(`project`);
-    projectContainer.classList.add(`${index}`);
+    projectContainer.classList.add("project");
+    projectContainer.classList.add(`p${index}`)
+    /* projectContainer.id = `p${index}`; */
 
     //creates clickable title for project
-    const titleBtn = contentTitleHelper(projectRef.name, contentFocused)
+    const titleBtn = contentTitleHelper(projectRef.name, index, contentFocused)
     projectContainer.appendChild(titleBtn);
 
     //need to call content taskhelper here later
@@ -38,7 +42,7 @@ const contentProjectHelper = function(projectRef, index, contentFocused){
 }
 
 //creates clickable title for project
-const contentTitleHelper = function(name, contentFocused){
+const contentTitleHelper = function(name, index, contentFocused){
     const title = document.createElement("h1");
     title.className = "title";
     title.textContent = name;
@@ -46,7 +50,9 @@ const contentTitleHelper = function(name, contentFocused){
     //view all button
     if(!(contentFocused)){
         const viewAllBtn = document.createElement("button");
-        viewAllBtn.className = "view-all-button";
+        viewAllBtn.classList.add("view-all-button");
+        viewAllBtn.classList.add(`v${index}`);
+
 
         const viewAllIcon = document.createElement("img");
         viewAllIcon.src = viewIcon;

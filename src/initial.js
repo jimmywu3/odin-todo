@@ -1,6 +1,7 @@
 import { Project } from "./project-task";
 import { Projects } from "./data";
 import {resetPage, contentProjectHelper} from "./domHelper";
+import {sidebarProjectBtnInitializer, viewAllBtnInitializer} from "./projectPage.js"
 
 const test = (function(){
     return "test";
@@ -9,7 +10,7 @@ const test = (function(){
 const sidebarHelper = function(projectRef, index){
     const project = document.createElement("li");
     const projectBtn = document.createElement("button");
-    projectBtn.className = `${index}`
+    projectBtn.id = `p${index}`
     projectBtn.textContent = projectRef.name;
     project.appendChild(projectBtn);
     return project;
@@ -56,7 +57,7 @@ const logoBtn = (function(){
 })();
 
 const updatePage = () => {
-    resetPage();
+    resetPage(false);
     createDom(Projects, Projects.length);
 }
 
@@ -67,7 +68,9 @@ const createDom = (function(array, length){
     const content = document.querySelector(".content");
     for(let i = 0; i < length; i++){
         sidebar.appendChild(sidebarHelper(array[i], i));
-        content.appendChild(contentProjectHelper(array[i], i, false))
+        sidebarProjectBtnInitializer(i);
+        content.appendChild(contentProjectHelper(array[i], i, false));
+        viewAllBtnInitializer(i);
     }
 });
 

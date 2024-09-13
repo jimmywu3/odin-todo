@@ -64,7 +64,7 @@ body{
     color: var(--nonfocus_text_color);
 }
 
-.sidebar .logo button:hover, .content .project .title{
+.sidebar .logo button:hover{
     cursor: pointer;
 }
 
