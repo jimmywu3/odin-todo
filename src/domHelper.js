@@ -51,7 +51,7 @@ const contentTitleHelper = function(name, index, contentFocused){
     if(!(contentFocused)){
         const viewAllBtn = document.createElement("button");
         viewAllBtn.classList.add("view-all-button");
-        viewAllBtn.classList.add(`v${index}`);
+        viewAllBtn.classList.add(`view${index}`);
 
 
         const viewAllIcon = document.createElement("img");
@@ -62,6 +62,20 @@ const contentTitleHelper = function(name, index, contentFocused){
         viewAllText.textContent = "View All";
         viewAllBtn.appendChild(viewAllText);
         title.appendChild(viewAllBtn);
+    } else {
+        const newBtn = document.createElement("button");
+        newBtn.classList.add("new-task-button");
+        newBtn.classList.add(`create${index}`);
+
+        /* Ended right here, when back get a new svg */
+        const viewAllIcon = document.createElement("img");
+        viewAllIcon.src = viewIcon;
+        newBtn.appendChild(viewAllIcon);  
+
+        const viewAllText = document.createElement("p");
+        viewAllText.textContent = "View All";
+        newBtn.appendChild(viewAllText);
+        title.appendChild(newBtn);
     }
 
     return title;

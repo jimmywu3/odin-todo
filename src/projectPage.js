@@ -12,7 +12,7 @@ const sidebarProjectBtnInitializer = (index) => {
 
 // view all button
 const viewAllBtnInitializer = (index) => {
-    const viewAllBtn = document.querySelector(`.v${index}`);
+    const viewAllBtn = document.querySelector(`.view${index}`);
     viewAllBtn.addEventListener("click", () => {
         console.log(`hi ${index}`)
         updateContent(Projects[index], index);
