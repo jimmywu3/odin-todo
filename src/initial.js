@@ -10,7 +10,7 @@ const test = (function(){
 const sidebarHelper = function(projectRef, index){
     const project = document.createElement("li");
     const projectBtn = document.createElement("button");
-    projectBtn.id = `p${index}`
+    projectBtn.className = `p${index}`
     projectBtn.textContent = projectRef.name;
     project.appendChild(projectBtn);
     return project;

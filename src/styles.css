@@ -122,6 +122,17 @@ body{
     overflow: hidden;
 }
 
+.project .focused{
+    padding: 8px 4px;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    grid-auto-rows: 250px;
+    gap: 16px;
+    overflow: hidden;
+}
+
 .project .tasks .task{
     border-top: solid 8px var(--sidebar_color);
     border-radius: 8px;

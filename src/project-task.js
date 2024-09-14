@@ -20,7 +20,7 @@ const Project = (function(name) {
     return {name, changeProjectName, addTask, removeTask, getTasks};
 });
 
-const Task = (function(name, description) {
+const Task = (function(name, description, dueDate="None") {
     function changeTaskName(name){
         this.name = name;
     }
@@ -29,7 +29,7 @@ const Task = (function(name, description) {
         this.description = description;
     }
 
-    return{name, description, changeTaskName, changeTaskDescription}
+    return{name, description, dueDate, changeTaskName, changeTaskDescription}
 });
 
 export {Project, Task}

@@ -83,10 +83,12 @@ const contentTitleHelper = function(name, index, contentFocused){
     return title;
 }
 
-// this could be repurposed for creating tasks n stuff in the individual project focused pages
 const contentTaskHelper = function(tasks, contentFocused){
     const tasksContainer = document.createElement("div");
-    tasksContainer.className = "tasks"
+    if(!(contentFocused))
+        tasksContainer.className = "tasks"
+    else
+        tasksContainer.className = "tasks focused"
 
     let limiter = tasks.length;
     if(!(contentFocused)){
@@ -101,8 +103,14 @@ const contentTaskHelper = function(tasks, contentFocused){
         name.textContent = tasks[i].name;
         taskContainer.appendChild(name);
 
+        if(contentFocused){
+            const description = document.createElement("p");
+            description.textContent = tasks[i].description;
+            taskContainer.appendChild(description);
+        }
+
         const dueDate = document.createElement("p");
-        dueDate.textContent = "Due Date";
+        dueDate.textContent = "Due Date: " + tasks[i].dueDate;
         taskContainer.appendChild(dueDate)
 
         const actions = document.createElement("div");

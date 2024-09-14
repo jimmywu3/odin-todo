@@ -4,9 +4,8 @@ import {Projects} from "./data.js"
 
 // sidebar project button
 const sidebarProjectBtnInitializer = (index) => {
-    const sidebarBtn = document.querySelector(`#p${index}`);
+    const sidebarBtn = document.querySelector(`.p${index}`);
     sidebarBtn.addEventListener("click", () => {
-        console.log(`hi ${index}`)
         updateContent(Projects[index], index);
     })    
 };
@@ -15,7 +14,6 @@ const sidebarProjectBtnInitializer = (index) => {
 const viewAllBtnInitializer = (index) => {
     const viewAllBtn = document.querySelector(`.view${index}`);
     viewAllBtn.addEventListener("click", () => {
-        console.log(`hi ${index}`)
         updateContent(Projects[index], index);
     })  
 };
@@ -40,11 +38,12 @@ const addTaskBtnInitializer = (index) => {
     const taskName = document.querySelector(".task-dialog form #taskName");
     const taskDescription = document.querySelector(".task-dialog form #description");
     const taskDate = document.querySelector(".task-dialog form #dueDate");
+    
 
-    submitBtn.addEventListener("click", (event) =>{
+    submitBtn.addEventListener("click", (event) => {
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
             event.preventDefault();
-            const task = Task(taskName.value, taskDescription.value);
+            const task = Task(taskName.value, taskDescription.value, taskDate.value);
             Projects[index].addTask(task);
             updateContent(Projects[index], index);
             dialog.close();
@@ -54,8 +53,11 @@ const addTaskBtnInitializer = (index) => {
             taskDescription.reportValidity();
             taskDate.reportValidity();
         }
+        console.log("When clicking addTask " + index);
     });
 
+    //todo stlyize it so that the height of a focused project
+    // is viewheight
 
 
 } 
