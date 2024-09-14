@@ -108,6 +108,9 @@ body{
     height: 16px;
 }
 
+.project .title button > *{
+    align-self: center;
+}
 
 .project .tasks{
     padding: 8px 4px;

@@ -1,4 +1,5 @@
 import {resetPage, contentProjectHelper} from "./domHelper.js"
+import { Task } from "./project-task.js"
 import {Projects} from "./data.js"
 
 // sidebar project button
@@ -19,14 +20,26 @@ const viewAllBtnInitializer = (index) => {
     })  
 };
 
-//creates the content page
+const addTaskBtnInitializer = (index) => {
+    const addTaskBtn = document.querySelector(`.create${index}`);
+    addTaskBtn.addEventListener("click", () => {
+        const newTask = Task("Temp", "dawg");
+        Projects[index].addTask(newTask)
+        updateContent(Projects[index], index)
+        //working
+    });
+} 
 
+const updateTasks = () => {
+
+}
 
 //create an updateContent function that only updates the content div
 const updateContent = (projectRef, index) => {
     const content = document.querySelector(".content");
     resetPage(true);
     content.append(contentProjectHelper(projectRef, index, true));
+    addTaskBtnInitializer(index);
 }
 
 export {sidebarProjectBtnInitializer, viewAllBtnInitializer}

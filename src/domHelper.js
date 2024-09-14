@@ -1,6 +1,7 @@
 import editIcon from "./assets/edit.svg"
 import finishIcon from "./assets/finish.svg"
 import viewIcon from "./assets/view.svg"
+import plusIcon from "./assets/plus.svg"
 
 const resetPage = function(contentFocused){
     let child;
@@ -63,18 +64,19 @@ const contentTitleHelper = function(name, index, contentFocused){
         viewAllBtn.appendChild(viewAllText);
         title.appendChild(viewAllBtn);
     } else {
+        // create task button
         const newBtn = document.createElement("button");
         newBtn.classList.add("new-task-button");
         newBtn.classList.add(`create${index}`);
 
         /* Ended right here, when back get a new svg */
-        const viewAllIcon = document.createElement("img");
-        viewAllIcon.src = viewIcon;
-        newBtn.appendChild(viewAllIcon);  
+        const newIcon = document.createElement("img");
+        newIcon.src = plusIcon;
+        newBtn.appendChild(newIcon);  
 
-        const viewAllText = document.createElement("p");
-        viewAllText.textContent = "View All";
-        newBtn.appendChild(viewAllText);
+        const newText = document.createElement("p");
+        newText.textContent = "Add Task";
+        newBtn.appendChild(newText);
         title.appendChild(newBtn);
     }
 
