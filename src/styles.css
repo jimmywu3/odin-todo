@@ -182,11 +182,6 @@ dialog form > *{
 
 dialog form .editCreate button{
     display: none;
-}
-
-/* This style will be applied when either the create or edit btn is clicked */
-/* dialog form .editCreate .create{
-    display: inline-block;
     width: 100%;
     margin-top: 2px;
-} */
+}

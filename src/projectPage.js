@@ -22,12 +22,42 @@ const viewAllBtnInitializer = (index) => {
 
 const addTaskBtnInitializer = (index) => {
     const addTaskBtn = document.querySelector(`.create${index}`);
+    const dialog = document.querySelector(".task-dialog");
+    const closeModal = document.querySelector(".task-dialog .close");
+
     addTaskBtn.addEventListener("click", () => {
-        const newTask = Task("Temp", "dawg");
-        Projects[index].addTask(newTask)
-        updateContent(Projects[index], index)
-        //working
+        const submitBtn = document.querySelector(".editCreate .create");
+        submitBtn.style.display = "inline-block"
+        dialog.showModal();
     });
+
+    closeModal.addEventListener("click", () => {
+        dialog.close();
+    })
+
+    const form = document.querySelector(".task-dialog form");
+    const submitBtn = document.querySelector(".editCreate .create");
+    const taskName = document.querySelector(".task-dialog form #taskName");
+    const taskDescription = document.querySelector(".task-dialog form #description");
+    const taskDate = document.querySelector(".task-dialog form #dueDate");
+
+    submitBtn.addEventListener("click", (event) =>{
+        if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
+            event.preventDefault();
+            const task = Task(taskName.value, taskDescription.value);
+            Projects[index].addTask(task);
+            updateContent(Projects[index], index);
+            dialog.close();
+            form.reset();
+        } else{
+            taskName.reportValidity();
+            taskDescription.reportValidity();
+            taskDate.reportValidity();
+        }
+    });
+
+
+
 } 
 
 const updateTasks = () => {
