@@ -23,12 +23,9 @@ const resetPage = function(contentFocused){
 }
 
 const resetTasks = function(){
+    const project = document.querySelector(".project");
     const tasks = document.querySelector(".tasks");
-    let child = tasks.lastElementChild;
-    while(child){
-        tasks.removeChild(child);
-        child = tasks.lastElementChild;
-    }
+    project.removeChild(tasks);
 }
 
 //contentFocused: true if only the content will be changed
@@ -153,4 +150,4 @@ const contentTaskHelper = function(tasks, contentFocused){
     return tasksContainer;
 }
 
-export {resetPage, resetTasks, contentProjectHelper};
+export {resetPage, resetTasks, contentProjectHelper, contentTaskHelper};

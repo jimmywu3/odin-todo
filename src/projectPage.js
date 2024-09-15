@@ -1,4 +1,4 @@
-import {resetPage, resetTasks, contentProjectHelper} from "./domHelper.js"
+import {resetPage, resetTasks, contentProjectHelper, contentTaskHelper} from "./domHelper.js"
 import { Task } from "./project-task.js"
 import {Projects} from "./data.js"
 
@@ -35,7 +35,7 @@ const createTaskInitializer = (function() {
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
             const task = Task(taskName.value, taskDescription.value, taskDate.value);
             Projects[index].addTask(task);
-            /* updateContent(Projects[index], index); */
+            updateTasks(Projects[index].getTasks())
             dialog.close();
             form.reset();
         } else{
@@ -65,6 +65,7 @@ const addTaskInitializer = (index) => {
     const submitBtn = document.querySelector(".editCreate .create");
 
     addTaskBtn.addEventListener("click", () => {
+        console.log("hihi")
         submitBtn.style.display = "inline-block"
         dialog.showModal();
     });
@@ -78,10 +79,10 @@ const addTaskInitializer = (index) => {
 
 // we might actually need this one 
 // by updating only the tasks, add task buttn wont need to be called again
-const updateTasks = () => {
+const updateTasks = (tasks) => {
     resetTasks();
-    
-
+    const project = document.querySelector(".project");
+    project.appendChild(contentTaskHelper(tasks, true));
 }
 
 //create an updateContent function that only updates the content div
