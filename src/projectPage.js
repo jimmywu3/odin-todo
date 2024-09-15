@@ -1,4 +1,4 @@
-import {resetPage, contentProjectHelper} from "./domHelper.js"
+import {resetPage, resetTasks, contentProjectHelper} from "./domHelper.js"
 import { Task } from "./project-task.js"
 import {Projects} from "./data.js"
 
@@ -18,34 +18,24 @@ const viewAllBtnInitializer = (index) => {
     })  
 };
 
-const addTaskBtnInitializer = (index) => {
-    const addTaskBtn = document.querySelector(`.create${index}`);
-    const dialog = document.querySelector(".task-dialog");
-    const closeModal = document.querySelector(".task-dialog .close");
-
-    addTaskBtn.addEventListener("click", () => {
-        const submitBtn = document.querySelector(".editCreate .create");
-        submitBtn.style.display = "inline-block"
-        dialog.showModal();
-    });
-
-    closeModal.addEventListener("click", () => {
-        dialog.close();
-    })
-
+const createTaskInitializer = (function() {
     const form = document.querySelector(".task-dialog form");
     const submitBtn = document.querySelector(".editCreate .create");
     const taskName = document.querySelector(".task-dialog form #taskName");
     const taskDescription = document.querySelector(".task-dialog form #description");
     const taskDate = document.querySelector(".task-dialog form #dueDate");
-    
+    const dialog = document.querySelector(".task-dialog");
+
+
 
     submitBtn.addEventListener("click", (event) => {
+        event.preventDefault();
+        const indexGetter = document.querySelector(".project");
+        const index = indexGetter.classList[1];
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
-            event.preventDefault();
             const task = Task(taskName.value, taskDescription.value, taskDate.value);
             Projects[index].addTask(task);
-            updateContent(Projects[index], index);
+            /* updateContent(Projects[index], index); */
             dialog.close();
             form.reset();
         } else{
@@ -53,16 +43,44 @@ const addTaskBtnInitializer = (index) => {
             taskDescription.reportValidity();
             taskDate.reportValidity();
         }
-        console.log("When clicking addTask " + index);
     });
 
-    //todo stlyize it so that the height of a focused project
-    // is viewheight
+})();
+
+const closeModalInitializer = (function(){
+    const form = document.querySelector(".task-dialog form");
+    const closeModal = document.querySelector(".task-dialog .close");
+    const dialog = document.querySelector(".task-dialog");
+    const submitBtn = document.querySelector(".editCreate .create");
+    closeModal.addEventListener("click", () => {
+        dialog.close();
+        form.reset();
+        submitBtn.style.display = "none"
+    })
+})();
+
+const addTaskInitializer = (index) => {
+    const addTaskBtn = document.querySelector(`.create${index}`);
+    const dialog = document.querySelector(".task-dialog");
+    const submitBtn = document.querySelector(".editCreate .create");
+
+    addTaskBtn.addEventListener("click", () => {
+        submitBtn.style.display = "inline-block"
+        dialog.showModal();
+    });
+    // current issue all of these eventlistners are getting created multiple times
+    // figure out how to get removeEventlister to work
+    // basically any time updateContent is called all the eventlisteners must be 
+    //removed
 
 
 } 
 
+// we might actually need this one 
+// by updating only the tasks, add task buttn wont need to be called again
 const updateTasks = () => {
+    resetTasks();
+    
 
 }
 
@@ -71,7 +89,7 @@ const updateContent = (projectRef, index) => {
     const content = document.querySelector(".content");
     resetPage(true);
     content.append(contentProjectHelper(projectRef, index, true));
-    addTaskBtnInitializer(index);
+    addTaskInitializer(index);
 }
 
 export {sidebarProjectBtnInitializer, viewAllBtnInitializer}

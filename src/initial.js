@@ -51,7 +51,6 @@ const createNewProjectInitializer = (function(){
 const logoBtn = (function(){
     const logo = document.querySelector(".logo button");
     logo.addEventListener("click", () => {
-        console.log("hi")
         updatePage();
     });
 })();

@@ -22,12 +22,21 @@ const resetPage = function(contentFocused){
     } 
 }
 
+const resetTasks = function(){
+    const tasks = document.querySelector(".tasks");
+    let child = tasks.lastElementChild;
+    while(child){
+        tasks.removeChild(child);
+        child = tasks.lastElementChild;
+    }
+}
+
 //contentFocused: true if only the content will be changed
 const contentProjectHelper = function(projectRef, index, contentFocused){
     // creates div with class of project and p#
     const projectContainer = document.createElement("div");
     projectContainer.classList.add("project");
-    projectContainer.classList.add(`p${index}`)
+    projectContainer.classList.add(`${index}`)
     /* projectContainer.id = `p${index}`; */
 
     //creates clickable title for project
@@ -144,4 +153,4 @@ const contentTaskHelper = function(tasks, contentFocused){
     return tasksContainer;
 }
 
-export {resetPage, contentProjectHelper};
+export {resetPage, resetTasks, contentProjectHelper};
