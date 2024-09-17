@@ -91,14 +91,12 @@ const contentTitleHelper = function(name, index, contentFocused){
 
 const contentTaskHelper = function(tasks, contentFocused){
     const tasksContainer = document.createElement("div");
-    if(!(contentFocused))
-        tasksContainer.className = "tasks"
-    else
-        tasksContainer.className = "tasks focused"
-
     let limiter = tasks.length;
     if(!(contentFocused)){
-        limiter = Math.min(tasks.length, 4)
+        tasksContainer.className = "tasks";
+        limiter = Math.min(tasks.length, 4);
+    }else{
+        tasksContainer.className = "tasks focused";
     }
 
     for(let i = 0; i < limiter; i++){
@@ -144,8 +142,26 @@ const contentTaskHelper = function(tasks, contentFocused){
         tasksContainer.appendChild(taskContainer);
     }
 
-    //Create an addmore / view all button
+    if(!(contentFocused)){
+        const extraBtn = document.createElement("button");
+        const icon = document.createElement("img");
+        const caption = document.createElement("p");
+        extraBtn.classList.add("placeholder");
+        //Create an addmore / view all button
+        if(tasks.length <= 0){
+            console.log("project has less than 0 tasks");
+            icon.src = plusIcon;
+            caption.textContent = "No Tasks Yet, Create Some!"
+        }else{
+            console.log("project has more than 0 tasks");
+            icon.src = viewIcon;
+            caption.textContent = "View All Tasks";
+        }
+        extraBtn.appendChild(icon);
+        extraBtn.appendChild(caption);
 
+        tasksContainer.appendChild(extraBtn);
+    }
 
     return tasksContainer;
 }

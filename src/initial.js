@@ -41,7 +41,6 @@ const createNewProjectInitializer = (function(){
             updatePage();
             dialog.close();
             form.reset();
-            console.log(Projects)
         } else{
             projectName.reportValidity();
         }
