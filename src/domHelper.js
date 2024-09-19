@@ -33,7 +33,9 @@ const contentProjectHelper = function(projectRef, index, contentFocused){
     // creates div with class of project and p#
     const projectContainer = document.createElement("div");
     projectContainer.classList.add("project");
-    projectContainer.classList.add(`${index}`)
+    projectContainer.classList.add(`p-${index}`);
+    projectContainer.classList.add(`${index}`);
+
     /* projectContainer.id = `p${index}`; */
 
     //creates clickable title for project
@@ -165,5 +167,10 @@ const contentTaskHelper = function(tasks, contentFocused){
 
     return tasksContainer;
 }
+
+// todo:
+// give contentTaskHelper a new parameter "index" so the placeholder
+// elements can be given an eventListner that moves page to focused 
+// content
 
 export {resetPage, resetTasks, contentProjectHelper, contentTaskHelper};

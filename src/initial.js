@@ -1,7 +1,7 @@
 import { Project } from "./project-task";
 import { Projects } from "./data";
 import {resetPage, contentProjectHelper} from "./domHelper";
-import {sidebarProjectBtnInitializer, viewAllBtnInitializer} from "./projectPage.js"
+import {sidebarProjectBtnInitializer, viewAllBtnInitializer, placeholderInitializer} from "./projectPage.js"
 
 const test = (function(){
     return "test";
@@ -69,6 +69,7 @@ const createDom = (function(array, length){
         sidebarProjectBtnInitializer(i);
         content.appendChild(contentProjectHelper(array[i], i, false));
         viewAllBtnInitializer(i);
+        placeholderInitializer(i);
     }
 });
 

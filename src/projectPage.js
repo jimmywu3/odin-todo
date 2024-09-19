@@ -18,6 +18,13 @@ const viewAllBtnInitializer = (index) => {
     })  
 };
 
+const placeholderInitializer = (index) => {
+    const placeholder = document.querySelector(`.p-${index} .tasks .placeholder`);
+    placeholder.addEventListener("click", () => {
+        updateContent(Projects[index], index);
+    });
+}
+
 const createTaskInitializer = (function() {
     const form = document.querySelector(".task-dialog form");
     const submitBtn = document.querySelector(".editCreate .create");
@@ -31,7 +38,7 @@ const createTaskInitializer = (function() {
     submitBtn.addEventListener("click", (event) => {
         event.preventDefault();
         const indexGetter = document.querySelector(".project");
-        const index = indexGetter.classList[1];
+        const index = indexGetter.classList[2];
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
             const task = Task(taskName.value, taskDescription.value, taskDate.value);
             Projects[index].addTask(task);
@@ -93,4 +100,4 @@ const updateContent = (projectRef, index) => {
     addTaskInitializer(index);
 }
 
-export {sidebarProjectBtnInitializer, viewAllBtnInitializer}
+export {sidebarProjectBtnInitializer, viewAllBtnInitializer, placeholderInitializer}
