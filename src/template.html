@@ -26,22 +26,20 @@
     </div>
 
     <dialog class="newProject">
-        <!-- Temp will add X icon later -->
-        <button class="close">close</button>
         <form action="">
             <label for="projectName">Project Name:</label>
             <input type="text" name="projectName" id="projectName" autofocus required>
             <button>Submit</button>
         </form>
+        <button class="close">Close</button>
     </dialog>
 
     <dialog class="task-dialog">
-        <button class="close">close</button>
         <form action="">
             <label for="taskName">Task Name:</label>
             <input type="text" name="taskName" id="taskName" required>
             <label for="description">Description:</label>
-            <input type="text" name="description" id="description">
+            <textarea type="text" name="description" id="description"></textarea>
             <label for="dueDate">Due Date:</label>
             <input type="date" name="dueDate" id="dueDate" required>
             <div class="editCreate">
@@ -49,6 +47,7 @@
                 <button class="create">Bye</button>
             </div>
         </form>
+        <button class="close">Close</button>
     </dialog>
 </body>
 </html>

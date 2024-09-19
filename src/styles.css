@@ -191,18 +191,17 @@ dialog{
     border-top: solid 8px var(--sidebar_color);
     border-radius: 8px;
     box-shadow: 0px 0px 5px 0px grey;
+    width: 300px;
 } 
 
 dialog .close{
-    position: absolute;
-    left: 144px;
-    top: 4px;
+    width: 100%;
+    margin: 2px 0;
 }
 
 dialog form{
     display: flex;
     flex-direction: column;
-    margin: 4px;
 }
 
 dialog form > *{

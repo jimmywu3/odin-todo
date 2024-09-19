@@ -2,6 +2,7 @@ import editIcon from "./assets/edit.svg"
 import finishIcon from "./assets/finish.svg"
 import viewIcon from "./assets/view.svg"
 import plusIcon from "./assets/plus.svg"
+import trashIcon from "./assets/trash.svg"
 
 const resetPage = function(contentFocused){
     let child;
@@ -122,24 +123,35 @@ const contentTaskHelper = function(tasks, contentFocused){
         const actions = document.createElement("div");
         actions.className = "actions";
 
-        const editBtn = document.createElement("button");
-        // create an image to store inside button
-        editBtn.id = "edit";
-        const editImg = document.createElement("img");
-        editImg.src = editIcon;
-        editBtn.appendChild(editImg);
-        actions.appendChild(editBtn);
+        if(contentFocused){
+            const actions = document.createElement("div");
+            actions.className = "actions";
 
-        const finishBtn = document.createElement("button");
-        // create an image to store inside button
-        finishBtn.id = "finish"
-        const finishImg = document.createElement("img");
-        finishImg.src = finishIcon;
-        finishBtn.appendChild(finishImg);
-        actions.appendChild(finishBtn);
+            const editBtn = document.createElement("button");
+            // create an image to store inside button
+            editBtn.id = "edit";
+            const editImg = document.createElement("img");
+            editImg.src = editIcon;
+            editBtn.appendChild(editImg);
+            actions.appendChild(editBtn);
 
-        taskContainer.appendChild(actions);
+            const finishBtn = document.createElement("button");
+            // create an image to store inside button
+            finishBtn.id = "finish";
+            const finishImg = document.createElement("img");
+            finishImg.src = finishIcon;
+            finishBtn.appendChild(finishImg);
+            actions.appendChild(finishBtn);
 
+            const deleteBtn = document.createElement("button");
+            deleteBtn.id = "delete";
+            const deleteImg = document.createElement("img");
+            deleteImg.src = trashIcon;
+            deleteBtn.appendChild(deleteImg);
+            actions.appendChild(deleteBtn);
+
+            taskContainer.appendChild(actions);
+        }
 
         tasksContainer.appendChild(taskContainer);
     }
