@@ -104,6 +104,9 @@ const contentTaskHelper = function(tasks, contentFocused){
 
 
     for(let i = 0; i < limiter; i++){
+        if(tasks[i].finished && !(contentFocused)){
+            continue;
+        }
         const taskContainer = document.createElement("div");
         taskContainer.className = `task ${i}`;
         if(tasks[i].finished){

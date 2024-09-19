@@ -42,7 +42,7 @@ const createTaskInitializer = (function() {
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
             const task = Task(taskName.value, taskDescription.value, taskDate.value);
             Projects[index].addTask(task);
-            updateTasks(Projects[index])
+            updateTasks(Projects[index]);
             dialog.close();
             form.reset();
         } else{
