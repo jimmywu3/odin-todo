@@ -112,6 +112,7 @@ const contentTaskHelper = function(tasks, contentFocused){
 
         if(contentFocused){
             const description = document.createElement("p");
+            description.className = "description";
             description.textContent = tasks[i].description;
             taskContainer.appendChild(description);
         }

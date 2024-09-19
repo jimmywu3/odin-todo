@@ -171,6 +171,10 @@ body{
     gap: 4px;
 }
 
+.tasks .task .description{
+    overflow: scroll;
+}
+
 .tasks .actions button{
     width: 32px;
     height: 32px;

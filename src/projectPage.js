@@ -42,7 +42,7 @@ const createTaskInitializer = (function() {
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
             const task = Task(taskName.value, taskDescription.value, taskDate.value);
             Projects[index].addTask(task);
-            updateTasks(Projects[index].getTasks())
+            updateTasks(Projects[index])
             dialog.close();
             form.reset();
         } else{
@@ -72,24 +72,35 @@ const addTaskInitializer = (index) => {
     const submitBtn = document.querySelector(".editCreate .create");
 
     addTaskBtn.addEventListener("click", () => {
-        console.log("hihi")
         submitBtn.style.display = "inline-block"
         dialog.showModal();
     });
-    // current issue all of these eventlistners are getting created multiple times
-    // figure out how to get removeEventlister to work
-    // basically any time updateContent is called all the eventlisteners must be 
-    //removed
-
-
 } 
+
+// create edit, finish, delete initializers
+// lets start with delete
+
+const deleteBtnInitializer = (projectRef) => {
+    const deleteBtn = document.querySelectorAll("#delete");
+    let index = 0;
+    deleteBtn.forEach((btn) => {
+        const currIdx = index;
+        btn.addEventListener("click", () => {
+            console.log(currIdx);
+            projectRef.removeTask(currIdx);
+            updateTasks(projectRef)
+        })
+        index++;
+    });
+}
 
 // we might actually need this one 
 // by updating only the tasks, add task buttn wont need to be called again
-const updateTasks = (tasks) => {
+const updateTasks = (projectRef) => {
     resetTasks();
     const project = document.querySelector(".project");
-    project.appendChild(contentTaskHelper(tasks, true));
+    project.appendChild(contentTaskHelper(projectRef.getTasks(), true));
+    deleteBtnInitializer(projectRef);
 }
 
 //create an updateContent function that only updates the content div
@@ -98,6 +109,7 @@ const updateContent = (projectRef, index) => {
     resetPage(true);
     content.append(contentProjectHelper(projectRef, index, true));
     addTaskInitializer(index);
+    deleteBtnInitializer(projectRef);
 }
 
 export {sidebarProjectBtnInitializer, viewAllBtnInitializer, placeholderInitializer}
