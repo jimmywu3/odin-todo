@@ -20,6 +20,7 @@ const task8 = Task("task8", "task4 description");
 project1.addTask(task8);
 const task9 = Task("task9", "task4 description");
 project1.addTask(task9);
+console.log(project1.getTasks()[1].finished);
 
 
 Projects.push(project1);

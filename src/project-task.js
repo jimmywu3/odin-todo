@@ -20,7 +20,7 @@ const Project = (function(name) {
     return {name, changeProjectName, addTask, removeTask, getTasks};
 });
 
-const Task = (function(name, description, dueDate="None") {
+const Task = (function(name, description, dueDate="None", finished=false) {
     function changeTaskName(name){
         this.name = name;
     }
@@ -29,7 +29,15 @@ const Task = (function(name, description, dueDate="None") {
         this.description = description;
     }
 
-    return{name, description, dueDate, changeTaskName, changeTaskDescription}
+    function changeDueDate(dueDate){
+        this.dueDate = dueDate;
+    }
+
+    function changeFinished(){
+        this.finished = !(this.finished);
+    }
+
+    return{name, description, dueDate, finished, changeTaskName, changeTaskDescription, changeDueDate, changeFinished}
 });
 
 export {Project, Task}

@@ -102,9 +102,13 @@ const contentTaskHelper = function(tasks, contentFocused){
         tasksContainer.className = "tasks focused";
     }
 
+
     for(let i = 0; i < limiter; i++){
         const taskContainer = document.createElement("div");
         taskContainer.className = `task ${i}`;
+        if(tasks[i].finished){
+            taskContainer.id = "finished";
+        }
 
         const name = document.createElement("h2");
         name.textContent = tasks[i].name;

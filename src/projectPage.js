@@ -86,9 +86,21 @@ const deleteBtnInitializer = (projectRef) => {
     deleteBtn.forEach((btn) => {
         const currIdx = index;
         btn.addEventListener("click", () => {
-            console.log(currIdx);
             projectRef.removeTask(currIdx);
             updateTasks(projectRef)
+        })
+        index++;
+    });
+}
+
+const finishBtnInitializer = (projectRef) => {
+    const finishBtn = document.querySelectorAll("#finish");
+    let index = 0;
+    finishBtn.forEach((btn) => {
+        const currIdx = index;
+        btn.addEventListener("click", () => {
+            projectRef.getTasks()[currIdx].changeFinished();
+            updateTasks(projectRef);
         })
         index++;
     });
@@ -101,6 +113,7 @@ const updateTasks = (projectRef) => {
     const project = document.querySelector(".project");
     project.appendChild(contentTaskHelper(projectRef.getTasks(), true));
     deleteBtnInitializer(projectRef);
+    finishBtnInitializer(projectRef);
 }
 
 //create an updateContent function that only updates the content div
@@ -110,6 +123,7 @@ const updateContent = (projectRef, index) => {
     content.append(contentProjectHelper(projectRef, index, true));
     addTaskInitializer(index);
     deleteBtnInitializer(projectRef);
+    finishBtnInitializer(projectRef);
 }
 
 export {sidebarProjectBtnInitializer, viewAllBtnInitializer, placeholderInitializer}
