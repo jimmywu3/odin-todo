@@ -177,6 +177,7 @@ body{
 
 .tasks .task .description{
     overflow: scroll;
+    word-break: break-all;
 }
 
 .tasks .actions button{

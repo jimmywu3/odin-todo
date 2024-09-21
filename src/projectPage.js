@@ -1,5 +1,5 @@
 import {resetPage, resetTasks, contentProjectHelper, contentTaskHelper} from "./domHelper.js"
-import { Task } from "./project-task.js"
+import { Project, Task } from "./project-task.js"
 import {Projects} from "./data.js"
 
 // sidebar project button
@@ -27,15 +27,14 @@ const placeholderInitializer = (index) => {
 
 const createTaskInitializer = (function() {
     const form = document.querySelector(".task-dialog form");
-    const submitBtn = document.querySelector(".editCreate .create");
     const taskName = document.querySelector(".task-dialog form #taskName");
     const taskDescription = document.querySelector(".task-dialog form #description");
     const taskDate = document.querySelector(".task-dialog form #dueDate");
     const dialog = document.querySelector(".task-dialog");
+    const createBtn = document.querySelector(".editCreate .create");
 
 
-
-    submitBtn.addEventListener("click", (event) => {
+    createBtn.addEventListener("click", (event) => {
         event.preventDefault();
         const indexGetter = document.querySelector(".project");
         const index = indexGetter.classList[2];
@@ -45,6 +44,7 @@ const createTaskInitializer = (function() {
             updateTasks(Projects[index]);
             dialog.close();
             form.reset();
+            createBtn.style.display = "none"
         } else{
             taskName.reportValidity();
             taskDescription.reportValidity();
@@ -54,25 +54,56 @@ const createTaskInitializer = (function() {
 
 })();
 
+const editTaskInitializer = (function() {
+    const form = document.querySelector(".task-dialog form");
+    const taskName = document.querySelector(".task-dialog form #taskName");
+    const taskDescription = document.querySelector(".task-dialog form #description");
+    const taskDate = document.querySelector(".task-dialog form #dueDate");
+    const dialog = document.querySelector(".task-dialog");
+    const edit = document.querySelector(".editCreate .edit");
+
+    edit.addEventListener("click", (event) => {
+        event.preventDefault();
+        const projectIndex = document.querySelector(".content .project").classList[2];
+        const taskIndex = edit.id;
+        const taskRef = Projects[projectIndex].getTasks()[taskIndex];
+        if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
+            taskRef.changeTaskName(taskName.value);
+            taskRef.changeTaskDescription(taskDescription.value)
+            taskRef.changeDueDate(taskDate.value)
+            updateTasks(Projects[projectIndex]);
+            dialog.close();
+            form.reset();
+            edit.style.display = "none"
+        } else{
+            taskName.reportValidity();
+            taskDescription.reportValidity();
+            taskDate.reportValidity();
+        }
+    });
+})();
+
 const closeModalInitializer = (function(){
     const form = document.querySelector(".task-dialog form");
     const closeModal = document.querySelector(".task-dialog .close");
     const dialog = document.querySelector(".task-dialog");
-    const submitBtn = document.querySelector(".editCreate .create");
+    const createBtn = document.querySelector(".editCreate .create");
+    const editBtn = document.querySelector(".editCreate .edit");
     closeModal.addEventListener("click", () => {
         dialog.close();
         form.reset();
-        submitBtn.style.display = "none"
+        createBtn.style.display = "none";
+        editBtn.style.display= "none";
     })
 })();
 
 const addTaskInitializer = (index) => {
     const addTaskBtn = document.querySelector(`.create${index}`);
     const dialog = document.querySelector(".task-dialog");
-    const submitBtn = document.querySelector(".editCreate .create");
+    const createBtn = document.querySelector(".editCreate .create");
 
     addTaskBtn.addEventListener("click", () => {
-        submitBtn.style.display = "inline-block"
+        createBtn.style.display = "inline-block"
         dialog.showModal();
     });
 } 
@@ -106,6 +137,31 @@ const finishBtnInitializer = (projectRef) => {
     });
 }
 
+const editBtnInitializer = (projectRef) => {
+    const finishBtn = document.querySelectorAll("#edit");
+    const editBtn = document.querySelector(".editCreate .edit");
+    const dialog = document.querySelector(".task-dialog");
+    const projectIndex = document.querySelector(".content .project").classList[2];
+
+    const taskName = document.querySelector(".task-dialog form #taskName");
+    const taskDescription = document.querySelector(".task-dialog form #description");
+    const taskDate = document.querySelector(".task-dialog form #dueDate");
+
+
+    let index = 0;
+    finishBtn.forEach((btn) => {
+        const currIdx = index;
+        btn.addEventListener("click", () => {
+            editBtn.style.display = "inline-block"
+            editBtn.id = currIdx;
+            taskName.value = Projects[projectIndex].getTasks()[currIdx].name;
+            taskDescription.value = Projects[projectIndex].getTasks()[currIdx].description;
+            dialog.showModal();
+        })
+        index++;
+    });
+}
+
 // we might actually need this one 
 // by updating only the tasks, add task buttn wont need to be called again
 const updateTasks = (projectRef) => {
@@ -114,6 +170,7 @@ const updateTasks = (projectRef) => {
     project.appendChild(contentTaskHelper(projectRef.getTasks(), true));
     deleteBtnInitializer(projectRef);
     finishBtnInitializer(projectRef);
+    editBtnInitializer(projectRef);
 }
 
 //create an updateContent function that only updates the content div
@@ -124,6 +181,7 @@ const updateContent = (projectRef, index) => {
     addTaskInitializer(index);
     deleteBtnInitializer(projectRef);
     finishBtnInitializer(projectRef);
+    editBtnInitializer(projectRef);
 }
 
 export {sidebarProjectBtnInitializer, viewAllBtnInitializer, placeholderInitializer}
