@@ -17,7 +17,7 @@ const Project = (function(name) {
         return tasks;
     }
 
-    return {name, changeProjectName, addTask, removeTask, getTasks};
+    return {name, tasks, changeProjectName, addTask, removeTask, getTasks};
 });
 
 const Task = (function(name, description, dueDate="None", finished=false) {

@@ -171,11 +171,9 @@ const contentTaskHelper = function(tasks, contentFocused){
         extraBtn.classList.add("placeholder");
         //Create an addmore / view all button
         if(tasks.length <= 0){
-            console.log("project has less than 0 tasks");
             icon.src = plusIcon;
             caption.textContent = "No Tasks Yet, Create Some!"
         }else{
-            console.log("project has more than 0 tasks");
             icon.src = viewIcon;
             caption.textContent = "View All Tasks";
         }
