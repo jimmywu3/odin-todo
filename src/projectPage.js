@@ -40,7 +40,7 @@ const createTaskInitializer = (function() {
         const index = indexGetter.classList[2];
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
             const task = Task(taskName.value, taskDescription.value, taskDate.value);
-            Projects[index].addTask(task);
+            Projects[index].tasks.push(task);
             updateTasks(Projects[index]);
             dialog.close();
             form.reset();
@@ -66,11 +66,11 @@ const editTaskInitializer = (function() {
         event.preventDefault();
         const projectIndex = document.querySelector(".content .project").classList[2];
         const taskIndex = edit.id;
-        const taskRef = Projects[projectIndex].getTasks()[taskIndex];
+        const taskRef = Projects[projectIndex].tasks[taskIndex];
         if(taskName.checkValidity() && taskDescription.checkValidity() && taskDate.checkValidity() ){
-            taskRef.changeTaskName(taskName.value);
-            taskRef.changeTaskDescription(taskDescription.value)
-            taskRef.changeDueDate(taskDate.value)
+            taskRef.name = taskName.value;
+            taskRef.description = taskDescription.value;
+            taskRef.dueDate = taskDate.value;
             updateTasks(Projects[projectIndex]);
             dialog.close();
             form.reset();
@@ -117,7 +117,7 @@ const deleteBtnInitializer = (projectRef) => {
     deleteBtn.forEach((btn) => {
         const currIdx = index;
         btn.addEventListener("click", () => {
-            projectRef.removeTask(currIdx);
+            projectRef.tasks.splice(currIdx,1);
             updateTasks(projectRef)
         })
         index++;
@@ -130,7 +130,7 @@ const finishBtnInitializer = (projectRef) => {
     finishBtn.forEach((btn) => {
         const currIdx = index;
         btn.addEventListener("click", () => {
-            projectRef.getTasks()[currIdx].changeFinished();
+            projectRef.tasks[currIdx].finished = !(projectRef.tasks[currIdx].finished);
             updateTasks(projectRef);
         })
         index++;
@@ -154,8 +154,8 @@ const editBtnInitializer = (projectRef) => {
         btn.addEventListener("click", () => {
             editBtn.style.display = "inline-block"
             editBtn.id = currIdx;
-            taskName.value = Projects[projectIndex].getTasks()[currIdx].name;
-            taskDescription.value = Projects[projectIndex].getTasks()[currIdx].description;
+            taskName.value = Projects[projectIndex].tasks[currIdx].name;
+            taskDescription.value = Projects[projectIndex].tasks[currIdx].description;
             dialog.showModal();
         })
         index++;
@@ -167,7 +167,7 @@ const editBtnInitializer = (projectRef) => {
 const updateTasks = (projectRef) => {
     resetTasks();
     const project = document.querySelector(".project");
-    project.appendChild(contentTaskHelper(projectRef.getTasks(), true));
+    project.appendChild(contentTaskHelper(projectRef.tasks, true));
     deleteBtnInitializer(projectRef);
     finishBtnInitializer(projectRef);
     editBtnInitializer(projectRef);

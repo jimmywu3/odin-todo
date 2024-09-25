@@ -44,7 +44,7 @@ const contentProjectHelper = function(projectRef, index, contentFocused){
     projectContainer.appendChild(titleBtn);
 
     //need to call content taskhelper here later
-    const taskContainer = contentTaskHelper(projectRef.getTasks(), contentFocused)
+    const taskContainer = contentTaskHelper(projectRef.tasks, contentFocused)
     projectContainer.appendChild(taskContainer);
     
 
