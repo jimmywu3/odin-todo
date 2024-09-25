@@ -37,7 +37,9 @@ const createNewProjectInitializer = (function(){
             event.preventDefault();
             console.log(projectName.value);
             const project = Project(projectName.value);
-            Projects.push(project);
+            const projectsRef = JSON.parse(localStorage.getItem("projects"));
+            projectsRef.push(project);
+            localStorage.setItem("projects", JSON.stringify(projectsRef));
             updatePage();
             dialog.close();
             form.reset();
@@ -56,7 +58,8 @@ const logoBtn = (function(){
 
 const updatePage = () => {
     resetPage(false);
-    createDom(Projects, Projects.length);
+    const parsedProjects = JSON.parse(localStorage.getItem("projects"));
+    createDom(parsedProjects, parsedProjects.length);
 }
 
 // will be moved into a dom helper js
