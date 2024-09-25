@@ -98,7 +98,7 @@ const contentTitleHelper = function(name, index, contentFocused){
         const deleteText = document.createElement("p");
         deleteText.textContent = "Delete Project";
         deleteBtn.appendChild(deleteText);
-        title.appendChild(deleteBtn);
+        title.appendChild(deleteBtn);   
     }
 
     return title;
