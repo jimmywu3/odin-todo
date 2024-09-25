@@ -76,4 +76,4 @@ const createDom = (function(array, length){
     }
 });
 
-export {test, createDom}; 
+export {test, createDom, updatePage}; 

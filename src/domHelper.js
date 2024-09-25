@@ -78,7 +78,6 @@ const contentTitleHelper = function(name, index, contentFocused){
         newBtn.classList.add("new-task-button");
         newBtn.classList.add(`create${index}`);
 
-        /* Ended right here, when back get a new svg */
         const newIcon = document.createElement("img");
         newIcon.src = plusIcon;
         newBtn.appendChild(newIcon);  
@@ -87,6 +86,19 @@ const contentTitleHelper = function(name, index, contentFocused){
         newText.textContent = "Add Task";
         newBtn.appendChild(newText);
         title.appendChild(newBtn);
+
+        const deleteBtn = document.createElement("button");
+        deleteBtn.classList.add("delete-project-button");
+        deleteBtn.classList.add(`delete${index}`);
+
+        const deleteIcon = document.createElement("img");
+        deleteIcon.src = trashIcon;
+        deleteBtn.appendChild(deleteIcon);
+
+        const deleteText = document.createElement("p");
+        deleteText.textContent = "Delete Project";
+        deleteBtn.appendChild(deleteText);
+        title.appendChild(deleteBtn);
     }
 
     return title;

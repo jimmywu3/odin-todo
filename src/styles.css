@@ -88,6 +88,7 @@ body{
     border: none;
     background-color: var(--background-color);
     display: flex;
+    gap: 6px;
 }
 
 .project .title button{
@@ -221,4 +222,16 @@ dialog form .editCreate button{
     display: none;
     width: 100%;
     margin-top: 2px;
+}
+
+.delete-dialog .choices{
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.delete-dialog button{
+    flex: 1;
+    padding: 6px 0;
 }

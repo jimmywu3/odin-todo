@@ -1,6 +1,7 @@
 import {resetPage, resetTasks, contentProjectHelper, contentTaskHelper} from "./domHelper.js"
 import { Project, Task } from "./project-task.js"
 import {Projects} from "./data.js"
+import { updatePage } from "./initial.js"
 
 // sidebar project button
 const sidebarProjectBtnInitializer = (index) => {
@@ -115,6 +116,37 @@ const addTaskInitializer = (index) => {
     });
 } 
 
+const deleteProjectInitializer = () => {
+    const deleteBtn = document.querySelector(".delete-project-button");
+    const deleteDialog = document.querySelector(".delete-dialog");
+    deleteBtn.addEventListener("click", () => {
+        deleteDialog.showModal();
+    })
+};
+
+const deleteNoInitializer = (function(){
+    const deny = document.querySelector(".choices .deny");
+    const deleteDialog = document.querySelector(".delete-dialog");
+    deny.addEventListener("click", () => {
+        deleteDialog.close();
+    })
+})();
+
+const deleteYesInitializer = (function(){
+    const confirm = document.querySelector(".choices .confirm");
+    const deleteDialog = document.querySelector(".delete-dialog");
+
+    confirm.addEventListener("click", () => {
+        const project = document.querySelector(".project");
+        const projectIndex = project.classList[2];
+        console.log(projectIndex);
+        const parsedProjects = JSON.parse(localStorage.getItem("projects"));
+        parsedProjects.splice(projectIndex,1);
+        localStorage.setItem("projects", JSON.stringify(parsedProjects));
+        deleteDialog.close();
+        updatePage();
+    })
+})();
 // create edit, finish, delete initializers
 // lets start with delete
 
@@ -184,6 +216,7 @@ const updateTasks = (projectRef, projectIndex) => {
     deleteBtnInitializer(projectIndex);
     finishBtnInitializer(projectIndex);
     editBtnInitializer();
+    deleteProjectInitializer();
 }
 
 //create an updateContent function that only updates the content div
@@ -195,6 +228,7 @@ const updateContent = (projectRef, index) => {
     deleteBtnInitializer(index);
     finishBtnInitializer(index);
     editBtnInitializer();
+    deleteProjectInitializer();
 }
 
 export {sidebarProjectBtnInitializer, viewAllBtnInitializer, placeholderInitializer}
